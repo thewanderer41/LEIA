@@ -1,0 +1,43 @@
+Location
+	loc_id
+	city
+	postal_code
+	state
+	street
+	latitude
+	longitude
+
+Restaurant
+	rest_id
+	rest_name
+	rating
+	rest_location (loc_id)
+	phone
+	open
+
+--------------------------------------------------
+
+Restaurant (Full)
+	name
+	location
+	locale
+	cuisine
+	price point
+	open/closed
+	wait time
+	seating/capacity
+	business hours
+	rating
+	discounts
+	age
+	reservesations
+	category
+	parking
+	service
+	popularity
+	clientele
+	menu
+	holidays
+	party options
+	allergies
+	vegan/vegetarian
