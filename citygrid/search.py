@@ -65,7 +65,7 @@ for restaurant in locations:
 			c.execute('''select last_insert_rowid()''')
 			cat_id = c.fetchone()[0]
 		elif temp_entry[2] == 'NULL':
-			c.execute('''insert into categories (parent_id, parent_name) values(?, ?)''', (parent_id, entry['parent']))
+			c.execute('''update categories set parent_id=?, parent_name=? where cat_id=?''', (parent_id, entry['parent'], cat_id))
 			c.execute('''select last_insert_rowid()''')
 			cat_id = c.fetchone()[0]
 		else:
