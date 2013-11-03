@@ -61,7 +61,7 @@ for restaurant in locations:
 		c.execute('''select * from categories where cat_name=?''',(entry['name'],))
 		temp_entry = c.fetchone()
 		if temp_entry == None:
-			c.execute('''insert into categorie values(NULL, ?, ?, ?)''',(entry['name'], parent_id, entry['parent']))
+			c.execute('''insert into categories values(NULL, ?, ?, ?)''',(entry['name'], parent_id, entry['parent']))
 			c.execute('''select last_insert_rowid()''')
 			cat_id = c.fetchone()[0]
 		elif temp_entry[2] == 'NULL':
@@ -85,12 +85,12 @@ for i in c:
 print ''
 
 print 'categories:'
-for i in c.execute('''select * from categories''')
+for i in c.execute('''select * from categories'''):
 	print "  "+str(i)
 print ''
 
 print 'matchings:'
-for i in c.execute('''select * from cat_matching''')
+for i in c.execute('''select * from cat_matching'''):
 	print "  "+str(i)
 print ''
 
