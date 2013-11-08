@@ -2,13 +2,14 @@ import json
 import sqlite3
 import urllib
 import urllib2
+import time
 
 url_params = {}
 url_params['type'] = 'restaurant'
 url_params['where'] = 'Troy,NY'
 url_params['publisher'] = 'test'
 url_params['format'] = 'json'
-url_params['rpp'] = '5'
+url_params['rpp'] = '50'
 
 host = 'api.citygridmedia.com/content/places/v2'
 where_path = '/search/where'
@@ -18,7 +19,16 @@ encoded_params = urllib.urlencode(url_params)
 url = 'http://%s%s?%s' %(host,where_path,encoded_params)
 print 'URL: %s' % (url,)
 
-conn = urllib2.urlopen(url, None)
+while True:
+	try:
+		conn = urllib2.urlopen(url, None)
+		break
+	except urllib2.URLError:
+		print 'connecting failed'
+		time.sleep(5)
+
+print 'got the list of restaurants'
+
 response = json.loads(conn.read())
 conn.close()
 
@@ -41,7 +51,13 @@ for restaurant in locations:
 	url_params['format'] = 'json'
 	encoded_params = urllib.urlencode(url_params)
 	url = 'http://%s%s?%s' %(host,detail_path,encoded_params)
-	connect = urllib2.urlopen(url,None)
+	while True:
+		try:
+			connect = urllib2.urlopen(url,None)
+			break
+		except urllib2.URLError:
+			print '  connecting failed'
+			time.sleep(10)
 	details = json.loads(connect.read())
 	connect.close()
 
@@ -71,6 +87,7 @@ for restaurant in locations:
 		else:
 			cat_id = temp_entry[0]
 		c.execute('''insert into cat_matching values(NULL, ?, ?)''', (rest_id, cat_id))
+	time.sleep(5)
 		
 c.execute('''select * from location''')
 print 'locations:'

@@ -28,20 +28,20 @@ cat_matching
 --------------------------------------------------
 
 Restaurant (Full)
-	name
-	location
+	*name
+	*location
 	locale
-	cuisine
+	*cuisine
 	price point
-	open/closed
+	*open/closed
 	wait time
 	seating/capacity
 	business hours
-	rating
+	*rating
 	discounts
 	age
 	reservesations
-	category
+	*category
 	parking
 	service
 	popularity
